@@ -55,16 +55,8 @@ const BDAY = (() => {
   ];
 
   function scheduleLoop(){
-    if (!ctx) return;
-    const now = ctx.currentTime + 0.1;
-    const noteDur = 0.62;
-    let t = now;
-    PROGRESSION.forEach(chord => {
-      chord.forEach((freq, i) => pluck(freq, t + i * noteDur, noteDur * 1.9, i === 0 ? 0.16 : 0.12));
-      t += noteDur * chord.length;
-    });
-    const totalDur = (t - now) * 1000;
-    loopTimer = setTimeout(scheduleLoop, totalDur - 40);
+   const el = new Audio('bgm.mp3');
+     el.loop = true; el.volume = 0.5; el.play();
   }
 
   function start(){
