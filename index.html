@@ -33,9 +33,11 @@
     100%{ opacity:0; transform:scale(1.6) rotate(6deg); }
   }
 
-  .whiteflash{
+.whiteflash{
     position:fixed; inset:0; background:#fff; z-index:41;
-    opacity:0; animation:flashPop .5s ease-out forwards; animation-delay:.55s;
+    opacity:0; 
+    pointer-events: none; /* Add this line here! */
+    animation:flashPop .5s ease-out forwards; animation-delay:.55s;
   }
   @keyframes flashPop{ 0%{opacity:0} 8%{opacity:.9} 100%{opacity:0} }
 
@@ -118,7 +120,7 @@
     </div>
     <p class="subtitle">Turn your volume up. This one's got fireworks, guitar strings, and a few things I've been meaning to tell you.</p>
     <span class="guitar-mark">🎸</span>
-    <a href="music.html">Begin the show →</a>
+    <a class= "next-link" href="fireworks.html">Begin the show →</a>
   </main>
 
 <script>
