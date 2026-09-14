@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Abhinav — Memories & Wishes</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .scene{ align-items:stretch; text-align:left; max-width:900px; margin:0 auto; padding-top:10vh; }
+  .hero-line{ text-align:center; margin-bottom:3rem; }
+  .hero-line .eyebrow{ color:var(--spark); letter-spacing:.04em; font-size:.95rem; margin-bottom:.5rem; }
+  .hero-line h2{ font-size:clamp(2rem, 5.5vw, 3.2rem); }
+
+  .gallery{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:1rem;
+    margin-bottom:3.2rem;
+  }
+  @media (max-width:640px){ .gallery{ grid-template-columns:repeat(2, 1fr); } }
+
+  .frame{
+    aspect-ratio:1/1; border-radius:14px; overflow:hidden;
+    border:1.5px solid var(--ink-line);
+    background:linear-gradient(150deg, var(--ink-panel), var(--ink-deep));
+    display:flex; align-items:center; justify-content:center;
+    position:relative;
+  }
+  .frame img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .frame .fallback{
+    display:flex; flex-direction:column; align-items:center; gap:.4rem;
+    color:var(--cream-dim); font-size:.72rem; padding:.6rem; text-align:center;
+  }
+  .frame .fallback .icon{ font-size:1.5rem; opacity:.6; }
+
+  .letter{
+    background:var(--ink-panel); border:1px solid var(--ink-line);
+    border-radius:18px; padding:2.4rem clamp(1.4rem, 5vw, 3rem);
+    margin-bottom:3rem;
+  }
+  .letter p{ color:var(--cream-dim); line-height:1.85; font-size:1.05rem; margin-bottom:1.1rem; }
+  .letter p:last-child{ margin-bottom:0; }
+  .letter strong{ color:var(--string); font-weight:600; }
+  .signoff{ margin-top:1.6rem; color:var(--cream); font-family:var(--display); font-size:1.15rem; }
+
+  .quotes{ display:grid; gap:.9rem; margin-bottom:3.4rem; }
+  .quote{
+    border-left:3px solid var(--flare);
+    padding:.3rem 0 .3rem 1.1rem;
+    color:var(--cream); font-size:1.02rem; font-style:italic;
+  }
+
+  .finale{ text-align:center; padding-bottom:8vh; }
+  #cake{ width:150px; margin:0 auto 1rem; display:block; cursor:pointer; }
+  .flame{ transform-origin:50% 100%; animation:flicker 1.4s ease-in-out infinite; }
+  @keyframes flicker{ 0%,100%{ transform:scaleY(1) rotate(-2deg); } 50%{ transform:scaleY(1.15) rotate(2deg); } }
+  .flame.out{ opacity:0; animation:none; }
+  .wish-note{ color:var(--cream-dim); font-size:.95rem; margin-top:.6rem; min-height:1.4em; }
+
+  .confetti-burst span{
+    position:fixed; top:50%; left:50%; width:8px; height:8px; z-index:60;
+    pointer-events:none; opacity:0; border-radius:2px;
+  }
+</style>
+</head>
+<body>
+  <div class="stars"></div>
+  <button class="sound-toggle" aria-label="toggle sound">🔊</button>
+  <div class="page-index">SCENE 4 / 4 — FOR YOU</div>
+
+  <main class="scene">
+    <div class="hero-line">
+      <div class="eyebrow">a few moments, and a few words</div>
+      <h2>Happy Birthday, Abhinav</h2>
+    </div>
+
+    <section class="gallery" id="gallery">
+      <!-- Replace assets/photos/photo1.jpg ... photo6.jpg with real photos of Abhinav.
+           Until you do, each frame shows a friendly placeholder instead of breaking. -->
+      <div class="frame"><img src="assets/photos/photo1.jpg" alt="Abhinav" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'fallback',innerHTML:'<span class=icon>🖼️</span>photo1.jpg'}))"></div>
+      <div class="frame"><img src="assets/photos/photo2.jpg" alt="Abhinav" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'fallback',innerHTML:'<span class=icon>🖼️</span>photo2.jpg'}))"></div>
+      <div class="frame"><img src="assets/photos/photo3.jpg" alt="Abhinav" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'fallback',innerHTML:'<span class=icon>🖼️</span>photo3.jpg'}))"></div>
+      <div class="frame"><img src="assets/photos/photo4.jpg" alt="Abhinav" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'fallback',innerHTML:'<span class=icon>🖼️</span>photo4.jpg'}))"></div>
+      <div class="frame"><img src="assets/photos/photo5.jpg" alt="Abhinav" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'fallback',innerHTML:'<span class=icon>🖼️</span>photo5.jpg'}))"></div>
+      <div class="frame"><img src="assets/photos/photo6.jpg" alt="Abhinav" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'fallback',innerHTML:'<span class=icon>🖼️</span>photo6.jpg'}))"></div>
+    </section>
+
+    <section class="letter">
+      <p>Another year down, and somehow you've gotten even more <strong>you</strong> — the same person who can turn a quiet room into something worth being in, just by picking up a guitar and playing whatever's in your head.</p>
+      <p>This year, I hope you back yourself the way you'd back a friend. I hope you finish the songs you've been sitting on. I hope the hard days are fewer and the easy ones are the kind you actually notice and enjoy — not just get through.</p>
+      <p><strong>You've got good instincts, real talent, and people around you who are glad you exist.</strong> That's a solid place to start a new year from.</p>
+      <div class="signoff">Happy Birthday. Go make some noise. 🎸</div>
+    </section>
+
+    <section class="quotes">
+      <div class="quote">"Play the note you're afraid of — that's usually the right one."</div>
+      <div class="quote">"You don't need to have it all figured out. You just need to keep showing up."</div>
+      <div class="quote">"The best year of your life hasn't happened yet."</div>
+    </section>
+
+    <section class="finale">
+      <svg id="cake" viewBox="0 0 160 140" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="90" width="120" height="40" rx="8" fill="#3a2a68" stroke="#FFC94D" stroke-width="2"/>
+        <rect x="30" y="70" width="100" height="26" rx="8" fill="#1E1240" stroke="#FF3E7F" stroke-width="2"/>
+        <rect x="76" y="40" width="8" height="32" fill="#F5EFFF"/>
+        <g class="flame" id="flame">
+          <path d="M80 18 C74 28 74 36 80 40 C86 36 86 28 80 18 Z" fill="#FFC94D"/>
+          <path d="M80 24 C77 30 77 34 80 37 C83 34 83 30 80 24 Z" fill="#FF3E7F"/>
+        </g>
+        <circle cx="45" cy="90" r="3" fill="#6FE3FF"/>
+        <circle cx="65" cy="90" r="3" fill="#FF3E7F"/>
+        <circle cx="95" cy="90" r="3" fill="#FFC94D"/>
+        <circle cx="115" cy="90" r="3" fill="#6FE3FF"/>
+      </svg>
+      <div class="wish-note" id="wishNote">click the candle and make a wish</div>
+    </section>
+  </main>
+
+<script src="audio.js"></script>
+<script>
+  const flame = document.getElementById('flame');
+  const cake = document.getElementById('cake');
+  const wishNote = document.getElementById('wishNote');
+  let blown = false;
+
+  cake.addEventListener('click', () => {
+    if (blown) return;
+    blown = true;
+    flame.classList.add('out');
+    wishNote.textContent = 'Whatever you wished for — I hope it finds you this year. 🎂';
+    burstConfetti();
+    if (window.BDAY) BDAY.boom();
+  });
+
+  function burstConfetti(){
+    const colors = ['#FF3E7F', '#FFC94D', '#6FE3FF', '#F5EFFF'];
+    const host = document.createElement('div');
+    host.className = 'confetti-burst';
+    document.body.appendChild(host);
+    for (let i = 0; i < 60; i++){
+      const s = document.createElement('span');
+      const angle = Math.random() * Math.PI * 2;
+      const dist = 120 + Math.random() * 260;
+      s.style.background = colors[i % colors.length];
+      s.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+      s.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+      s.style.animation = `confettiFly ${0.9 + Math.random() * 0.6}s ease-out forwards`;
+      host.appendChild(s);
+    }
+    setTimeout(() => host.remove(), 1700);
+  }
+
+  const styleTag = document.createElement('style');
+  styleTag.textContent = `
+    @keyframes confettiFly{
+      0%{ opacity:1; transform:translate(-50%,-50%) translate(0,0) rotate(0deg); }
+      100%{ opacity:0; transform:translate(-50%,-50%) translate(var(--dx), var(--dy)) rotate(340deg); }
+    }`;
+  document.head.appendChild(styleTag);
+</script>
+</body>
+</html>

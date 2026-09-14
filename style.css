@@ -1,0 +1,115 @@
+/* ============================================================
+   Shared tokens — Abhinav's Birthday Site
+   Palette: night-stage violet + magenta flare + gold string + cyan spark
+   Type: Righteous (display / poster energy) + Poppins (body)
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Righteous&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root{
+  --ink-deep:   #140C2C;   /* base night stage        */
+  --ink-panel:  #1E1240;   /* raised panel / card      */
+  --ink-line:   #372a5e;   /* hairline / border        */
+  --flare:      #FF3E7F;   /* magenta flare            */
+  --flare-soft: #ff6fa0;
+  --string:     #FFC94D;   /* gold — guitar string / firework */
+  --spark:      #6FE3FF;   /* cyan spark               */
+  --cream:      #F5EFFF;   /* primary text on dark     */
+  --cream-dim:  #C6BBEA;   /* secondary text on dark   */
+
+  --display: 'Righteous', 'Poppins', sans-serif;
+  --body:    'Poppins', sans-serif;
+}
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+
+html{ scroll-behavior:smooth; }
+
+body{
+  background:var(--ink-deep);
+  color:var(--cream);
+  font-family:var(--body);
+  min-height:100vh;
+  overflow-x:hidden;
+  position:relative;
+}
+
+/* soft vignette + star grain used on every scene */
+body::before{
+  content:'';
+  position:fixed; inset:0;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255,62,127,0.10), transparent 60%),
+    radial-gradient(circle at 15% 85%, rgba(111,227,255,0.08), transparent 55%),
+    var(--ink-deep);
+  z-index:-2;
+}
+
+.stars{ position:fixed; inset:0; z-index:-1; pointer-events:none; }
+.stars span{
+  position:absolute; width:2px; height:2px; border-radius:50%;
+  background:var(--cream); opacity:.5;
+  animation:twinkle 3.5s ease-in-out infinite;
+}
+@keyframes twinkle{ 0%,100%{opacity:.15} 50%{opacity:.8} }
+
+h1,h2,h3{ font-family:var(--display); font-weight:400; letter-spacing:.5px; line-height:1.15; }
+
+a{ color:inherit; text-decoration:none; }
+
+/* ---------- reusable scene shell ---------- */
+.scene{
+  min-height:100vh;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding:8vh 6vw;
+  text-align:center;
+  position:relative;
+}
+
+/* ---------- continue / nav button ---------- */
+.next-link{
+  margin-top:3.2rem;
+  display:inline-flex; align-items:center; gap:.6rem;
+  padding:.9rem 2.1rem;
+  border-radius:999px;
+  border:1.5px solid var(--string);
+  color:var(--string);
+  font-family:var(--body); font-weight:600; font-size:1rem;
+  background:transparent;
+  cursor:pointer;
+  transition:transform .35s ease, background .35s ease, color .35s ease, box-shadow .35s ease;
+  opacity:0; animation:riseIn .9s ease forwards;
+  animation-delay:2.4s;
+}
+.next-link:hover{
+  background:var(--string); color:var(--ink-deep);
+  box-shadow:0 0 28px rgba(255,201,77,.55);
+  transform:translateY(-2px);
+}
+@keyframes riseIn{ from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:translateY(0)} }
+
+/* ---------- sound toggle, present on every page ---------- */
+.sound-toggle{
+  position:fixed; top:1.4rem; right:1.4rem; z-index:50;
+  width:3rem; height:3rem; border-radius:50%;
+  border:1.5px solid var(--ink-line);
+  background:rgba(30,18,64,.7); backdrop-filter:blur(6px);
+  color:var(--cream); font-size:1.15rem;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer;
+}
+.sound-toggle:hover{ border-color:var(--string); }
+
+.page-index{
+  position:fixed; top:1.5rem; left:1.5rem; z-index:50;
+  font-family:var(--body); font-size:.78rem; letter-spacing:.14em;
+  color:var(--cream-dim);
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
+}
+
+@media (max-width:640px){
+  .scene{ padding:7vh 6vw; }
+}

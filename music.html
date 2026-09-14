@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Abhinav — Your Music</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .scene{ min-height:100vh; }
+  .music-wrap{
+    display:grid; grid-template-columns:1fr 1.15fr; gap:5vw;
+    align-items:center; max-width:1100px; width:100%;
+    text-align:left;
+  }
+  @media (max-width:840px){
+    .music-wrap{ grid-template-columns:1fr; text-align:center; }
+    .guitar-col{ order:2; }
+  }
+
+  .guitar-col{ display:flex; justify-content:center; }
+  #guitar{ width:min(78vw, 320px); filter:drop-shadow(0 18px 34px rgba(0,0,0,.45)); cursor:pointer; }
+  .string{ transition:stroke .08s ease; }
+  .string:hover{ stroke:var(--flare-soft); }
+  .string.plucked{ animation:pluckShake .35s ease; }
+  @keyframes pluckShake{
+    0%{ transform:translateX(0); } 25%{ transform:translateX(-1.6px); }
+    50%{ transform:translateX(1.6px); } 75%{ transform:translateX(-1px); } 100%{ transform:translateX(0); }
+  }
+  .guitar-hint{ font-size:.82rem; color:var(--cream-dim); text-align:center; margin-top:1rem; }
+
+  .text-col .eyebrow{ color:var(--spark); font-size:.95rem; letter-spacing:.04em; margin-bottom:.6rem; }
+  .text-col h2{ font-size:clamp(2rem, 5vw, 3rem); color:var(--cream); margin-bottom:1.1rem; }
+  .text-col p{ color:var(--cream-dim); line-height:1.75; font-size:1.04rem; max-width:46ch; margin-bottom:1rem; }
+  .text-col p:last-of-type{ margin-bottom:0; }
+  .text-col strong{ color:var(--string); font-weight:600; }
+
+  .notes-float span{
+    position:fixed; z-index:0; font-size:1.4rem; opacity:.35; color:var(--spark);
+    animation:noteRise linear infinite; pointer-events:none;
+  }
+  @keyframes noteRise{
+    from{ transform:translateY(10vh) rotate(0deg); opacity:0; }
+    10%{ opacity:.45; }
+    90%{ opacity:.3; }
+    to{ transform:translateY(-110vh) rotate(25deg); opacity:0; }
+  }
+</style>
+</head>
+<body>
+  <div class="stars"></div>
+  <div class="notes-float" id="notesFloat"></div>
+  <button class="sound-toggle" aria-label="toggle sound">🔊</button>
+  <div class="page-index">SCENE 3 / 4 — YOUR SOUND</div>
+
+  <main class="scene">
+    <div class="music-wrap">
+      <div class="guitar-col">
+        <div>
+          <svg id="guitar" viewBox="0 0 200 420" xmlns="http://www.w3.org/2000/svg">
+            <!-- headstock -->
+            <rect x="86" y="6" width="28" height="70" rx="8" fill="#2a1c52" stroke="#4a3a80" stroke-width="2"/>
+            <circle cx="94" cy="20" r="4" fill="#FFC94D"/>
+            <circle cx="106" cy="20" r="4" fill="#FFC94D"/>
+            <circle cx="94" cy="36" r="4" fill="#FFC94D"/>
+            <circle cx="106" cy="36" r="4" fill="#FFC94D"/>
+            <circle cx="94" cy="52" r="4" fill="#FFC94D"/>
+            <circle cx="106" cy="52" r="4" fill="#FFC94D"/>
+            <!-- neck -->
+            <rect x="92" y="70" width="16" height="150" fill="#3a2a68"/>
+            <g stroke="#150e2e" stroke-width="1" opacity=".6">
+              <line x1="92" y1="95" x2="108" y2="95"/>
+              <line x1="92" y1="115" x2="108" y2="115"/>
+              <line x1="92" y1="135" x2="108" y2="135"/>
+              <line x1="92" y1="155" x2="108" y2="155"/>
+              <line x1="92" y1="175" x2="108" y2="175"/>
+              <line x1="92" y1="195" x2="108" y2="195"/>
+            </g>
+            <!-- body -->
+            <path d="M100 210
+                     C50 210 30 250 40 290
+                     C48 322 70 330 100 330
+                     C130 330 152 322 160 290
+                     C170 250 150 210 100 210 Z"
+                  fill="url(#bodyGrad)" stroke="#FFC94D" stroke-width="2.5"/>
+            <defs>
+              <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#3a2a68"/>
+                <stop offset="100%" stop-color="#1E1240"/>
+              </linearGradient>
+            </defs>
+            <circle cx="100" cy="270" r="30" fill="#0f0a22" stroke="#FF3E7F" stroke-width="2"/>
+            <rect x="86" y="300" width="28" height="10" rx="2" fill="#150e2e"/>
+
+            <!-- strings: clickable -->
+            <line class="string" data-freq="82.41"  x1="94" y1="20" x2="90"  y2="312" stroke="#F5EFFF" stroke-width="1.4"/>
+            <line class="string" data-freq="110.00" x1="106" y1="20" x2="97" y2="312" stroke="#F5EFFF" stroke-width="1.4"/>
+            <line class="string" data-freq="146.83" x1="94" y1="36" x2="104" y2="312" stroke="#F5EFFF" stroke-width="1.6"/>
+            <line class="string" data-freq="196.00" x1="106" y1="36" x2="111" y2="312" stroke="#F5EFFF" stroke-width="1.8"/>
+            <line class="string" data-freq="246.94" x1="94" y1="52" x2="118" y2="312" stroke="#F5EFFF" stroke-width="2"/>
+            <line class="string" data-freq="329.63" x1="106" y1="52" x2="125" y2="312" stroke="#F5EFFF" stroke-width="2.2"/>
+          </svg>
+          <p class="guitar-hint">pluck a string — go on 🎶</p>
+        </div>
+      </div>
+
+      <div class="text-col">
+        <div class="eyebrow">the soundtrack of you</div>
+        <h2>You don't just play guitar. You disappear into it.</h2>
+        <p>Everyone who knows you, knows this about you first: put a guitar in your hands and the rest of the world gets a little quieter. <strong>That focus, that patience with something until it finally sounds right</strong> — that's not just a hobby, it's who you are.</p>
+        <p>Here's to another year of chasing the riff you can't quite get yet, of finding songs that feel like they were written for exactly this moment in your life, and of turning ordinary evenings into something worth remembering.</p>
+        <p>Keep playing loud. Keep playing often. <strong>The world's better with your sound in it.</strong></p>
+        <a class="next-link" href="memories.html" style="animation-delay:.4s;">Keep going →</a>
+      </div>
+    </div>
+  </main>
+
+<script src="audio.js"></script>
+<script>
+  // floating music notes in the background
+  const host = document.getElementById('notesFloat');
+  const glyphs = ['♪','♫','♬','♩'];
+  for (let i = 0; i < 14; i++){
+    const s = document.createElement('span');
+    s.textContent = glyphs[i % glyphs.length];
+    s.style.left = Math.random() * 100 + 'vw';
+    s.style.animationDuration = (9 + Math.random() * 8) + 's';
+    s.style.animationDelay = (Math.random() * 9) + 's';
+    host.appendChild(s);
+  }
+
+  // clickable guitar strings
+  document.querySelectorAll('.string').forEach(str => {
+    str.addEventListener('click', () => {
+      const freq = parseFloat(str.dataset.freq);
+      if (window.BDAY) BDAY.note(freq * 2); // one octave up, sits nicer as a "pluck"
+      str.classList.remove('plucked'); void str.offsetWidth; str.classList.add('plucked');
+    });
+  });
+
+  // gentle welcome strum on arrival
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const strings = document.querySelectorAll('.string');
+      strings.forEach((str, i) => {
+        setTimeout(() => {
+          const freq = parseFloat(str.dataset.freq);
+          if (window.BDAY) BDAY.note(freq * 2);
+          str.classList.add('plucked');
+          setTimeout(() => str.classList.remove('plucked'), 350);
+        }, i * 140);
+      });
+    }, 900);
+  });
+</script>
+</body>
+</html>

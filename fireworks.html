@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Abhinav — Fireworks</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  body{ overflow:hidden; height:100vh; }
+  canvas{ position:fixed; inset:0; z-index:1; }
+
+  .fw-caption{
+    position:relative; z-index:5;
+    text-align:center; pointer-events:none;
+  }
+  .fw-caption h2{
+    font-size:clamp(1.8rem, 6vw, 3.4rem);
+    color:var(--cream);
+    text-shadow:0 0 30px rgba(255,62,127,.5);
+    opacity:0; animation:capIn 1s ease forwards; animation-delay:1.2s;
+  }
+  .fw-caption p{
+    margin-top:.9rem; color:var(--cream-dim); font-size:1.05rem;
+    max-width:34ch; margin-left:auto; margin-right:auto;
+    opacity:0; animation:capIn 1s ease forwards; animation-delay:2s;
+  }
+  @keyframes capIn{ to{ opacity:1; } }
+
+  .hint{
+    position:fixed; bottom:2.2rem; left:50%; transform:translateX(-50%);
+    z-index:5; font-size:.85rem; color:var(--cream-dim);
+    opacity:0; animation:capIn 1s ease forwards; animation-delay:2.6s;
+    pointer-events:none;
+  }
+
+  .next-link{ pointer-events:auto; position:relative; z-index:6; }
+</style>
+</head>
+<body>
+  <canvas id="sky"></canvas>
+  <button class="sound-toggle" aria-label="toggle sound">🔊</button>
+  <div class="page-index">SCENE 2 / 4 — FIREWORKS</div>
+
+  <main class="scene" style="justify-content:space-between; min-height:100vh; padding-top:14vh; padding-bottom:8vh;">
+    <div class="fw-caption">
+      <h2>Light up the sky, Abhinav 🎆</h2>
+      <p>One firework for every reason you deserve today — and there are far more than the sky can hold.</p>
+    </div>
+    <a class="next-link" href="music.html">On to your favourite part →</a>
+  </main>
+  <div class="hint">tap / click anywhere to launch one yourself</div>
+
+<script src="audio.js"></script>
+<script>
+(function(){
+  const canvas = document.getElementById('sky');
+  const ctx = canvas.getContext('2d');
+  let W, H;
+  function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const colors = ['#FF3E7F', '#FFC94D', '#6FE3FF', '#F5EFFF', '#B38CFF'];
+  let rockets = [];
+  let particles = [];
+
+  function launchRocket(x){
+    rockets.push({
+      x: x ?? (40 + Math.random() * (W - 80)),
+      y: H,
+      targetY: H * (0.18 + Math.random() * 0.32),
+      speed: 6.5 + Math.random() * 2.5,
+      color: colors[Math.floor(Math.random() * colors.length)]
+    });
+  }
+
+  function explode(x, y, color){
+    const count = 46 + Math.floor(Math.random() * 30);
+    for (let i = 0; i < count; i++){
+      const angle = (Math.PI * 2 * i) / count;
+      const speed = 1.6 + Math.random() * 3.4;
+      particles.push({
+        x, y,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        life: 1,
+        decay: 0.008 + Math.random() * 0.012,
+        color
+      });
+    }
+    if (window.BDAY) BDAY.boom();
+  }
+
+  function tick(){
+    ctx.fillStyle = 'rgba(20,12,44,0.22)';
+    ctx.fillRect(0, 0, W, H);
+
+    rockets.forEach(r => {
+      r.y -= r.speed;
+      ctx.beginPath();
+      ctx.fillStyle = r.color;
+      ctx.arc(r.x, r.y, 2.4, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    rockets = rockets.filter(r => {
+      if (r.y <= r.targetY){ explode(r.x, r.y, r.color); return false; }
+      return true;
+    });
+
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      p.vy += 0.035; // gravity
+      p.life -= p.decay;
+      ctx.globalAlpha = Math.max(p.life, 0);
+      ctx.beginPath();
+      ctx.fillStyle = p.color;
+      ctx.arc(p.x, p.y, 2.1, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    });
+    particles = particles.filter(p => p.life > 0);
+
+    requestAnimationFrame(tick);
+  }
+  tick();
+
+  // auto show
+  let autoCount = 0;
+  const autoTimer = setInterval(() => {
+    launchRocket();
+    autoCount++;
+    if (autoCount > 26) clearInterval(autoTimer);
+  }, 750);
+
+  // click / tap to launch your own
+  window.addEventListener('click', (e) => {
+    if (e.target.closest('.next-link') || e.target.closest('.sound-toggle')) return;
+    launchRocket(e.clientX);
+  });
+  window.addEventListener('touchstart', (e) => {
+    if (e.target.closest('.next-link') || e.target.closest('.sound-toggle')) return;
+    const t = e.touches[0];
+    launchRocket(t.clientX);
+  });
+})();
+</script>
+</body>
+</html>
